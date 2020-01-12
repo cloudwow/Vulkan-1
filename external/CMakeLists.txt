@@ -14,7 +14,7 @@ set(KTX_SOURCES
     ${KTX_DIR}/lib/swap.c
     ${KTX_DIR}/lib/memstream.c
     ${KTX_DIR}/lib/filestream.c
-)
+        ../examples/instancing/PerlinNoise.h)
 set(KTX_INCLUDE
     ${KTX_DIR}/include
     ${KTX_DIR}/lib

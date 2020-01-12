@@ -17,7 +17,7 @@ float hash33(vec3 p3)
 
 vec3 starField(vec3 pos)
 {
-	vec3 color = vec3(0.0);
+	vec3 color = vec3(0.5,0.5,0.8);
 	float threshhold = (1.0 - STARFREQUENCY);
 	float rnd = hash33(pos);
 	if (rnd >= threshhold)

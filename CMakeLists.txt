@@ -1,11 +1,13 @@
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 cmake_policy(VERSION 2.8)
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 
 set(NAME vulkanExamples)
 
 project(${NAME})
 
+set(CMAKE_CXX_STANDARD 17)
 include_directories(external)
 include_directories(external/glm)
 include_directories(external/gli)
