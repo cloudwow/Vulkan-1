@@ -32,12 +32,12 @@
 #if defined(__ANDROID__)
 #define INSTANCE_COUNT 4096
 #else
-#define INSTANCE_COUNT 4096*16*2
+#define INSTANCE_COUNT 4096*4*2
 #endif
 
 #include "PerlinNoise.h"
 
-glm::vec3(15.0f, -80.0f, 10.0f)
+// glm::vec3(15.0f, -80.0f, 10.0f)
 class VulkanExample : public VulkanExampleBase {
 public:
     struct {
@@ -76,7 +76,7 @@ public:
     struct UBOVS {
         glm::mat4 projection;
         glm::mat4 modelView;
-        glm::vec4 lightPos = glm::vec4(10.0f, 0.0f, 0.0f, 1.0f);
+        glm::vec4 lightPos = glm::vec4(10.0f, 80.0f, 0.0f, 1.0f);
         float locSpeed = 0.0f;
         float globSpeed = 0.0f;
     } uboVS;
@@ -103,7 +103,7 @@ public:
       title = "Instanced mesh rendering";
       camera.type = Camera::CameraType::firstperson;
       camera.movementSpeed = 17.5f;
-      camera.setPosition(glm::vec3(15.0f, -80.0f, 10.0f));
+      camera.setPosition(glm::vec3(15.0f, -40.0f, 10.0f));
       camera.setRotation(glm::vec3(180.0f, 0.0f, 0.0f));
       camera.setPerspective(60.0f, (float)width / (float)height, 0.1f, 256.0f);
 
@@ -519,14 +519,14 @@ public:
 
 
       std::vector<InstanceData> instanceData;
-      instanceData.resize(4096 * 16 *2);
+      instanceData.resize(4096 * 4 *2);
 
       std::default_random_engine rndGenerator(benchmark.active ? 0 : (unsigned) time(nullptr));
       std::uniform_real_distribution<float> uniformDist(0.0, 1.0);
       std::uniform_int_distribution<uint32_t> rndTextureIndex(0, textures.rocks.layerCount);
-      for (auto x = 0; x < 256; x++) {
-        for (auto y = 0; y < 256; y++) {
-          int i = x * 512 + y*2;
+      for (auto x = 0; x < 128; x++) {
+        for (auto y = 0; y < 128; y++) {
+          int i = x * 256 + y*2;
           double altFactor = perlin.octaveNoise0_1(x / fx, y / fy, 2.0)* 1.0+ 1.0;
           double alt = perlin.octaveNoise0_1(x / fx, y / fy, octaves) * 26.0 * altFactor;
           /*
@@ -540,13 +540,13 @@ public:
           if(alt<0.0) {
             alt =0.0;
           }
-          instanceData[i].pos = glm::vec3((float) x - 128, (int)alt, (float) y - 128);
+          instanceData[i].pos = glm::vec3((float) x - 64, (int)alt, (float) y - 64);
           instanceData[i].rot = glm::vec3(0, 0,
                                           0);// glm::vec3(M_PI * uniformDist(rndGenerator), M_PI * uniformDist(rndGenerator), M_PI * uniformDist(rndGenerator));
           instanceData[i].scale = 2.01;
           instanceData[i].texIndex = alt/4.0+0.99;
 
-          instanceData[i+1].pos = glm::vec3((float) x - 128, (int)alt-1, (float) y - 128);
+          instanceData[i+1].pos = glm::vec3((float) x - 64, (int)alt-1, (float) y - 64);
           instanceData[i+1].rot = glm::vec3(0, 0,
                                           0);// glm::vec3(M_PI * uniformDist(rndGenerator), M_PI * uniformDist(rndGenerator), M_PI * uniformDist(rndGenerator));
           instanceData[i+1].scale = 2.01;
@@ -625,7 +625,7 @@ public:
         uboVS.modelView = camera.matrices.view;
 
       //  uboVS.lightPos =glm::vec4(camera.position,1.0);
-        uboVS.lightPos =glm::vec4(10.0f, 0.0f, 0.0f, 1.0f);
+        uboVS.lightPos =glm::vec4(80.0f, 80.0f, 0.0f, 1.0f);
 
 
       }

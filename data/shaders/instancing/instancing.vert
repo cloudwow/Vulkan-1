@@ -41,6 +41,6 @@ void main()
 
 	pos = ubo.modelview * vec4(inPos.xyz + instancePos, 1.0);
 	vec3 lPos = mat3(ubo.modelview) * ubo.lightPos.xyz;
-	outLightVec = lPos - pos.xyz;
+	outLightVec = lPos ;
 	outViewVec = -pos.xyz;
 }
