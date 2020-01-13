@@ -2238,22 +2238,23 @@ void VulkanExampleBase::handleMouseMove(int32_t x, int32_t y)
 		return;
 	}
 
-	if (mouseButtons.left) {
-		rotation.x += dy * 1.25f * rotationSpeed;
-		rotation.y -= dx * 1.25f * rotationSpeed;
-		camera.rotate(glm::vec3(dy * camera.rotationSpeed, -dx * camera.rotationSpeed, 0.0f));
-		viewUpdated = true;
-	}
+
 	if (mouseButtons.right) {
 		zoom += dy * .005f * zoomSpeed;
 		camera.translate(glm::vec3(-0.0f, 0.0f, dy * .005f * zoomSpeed));
 		viewUpdated = true;
-	}
-	if (mouseButtons.middle) {
+	} else 	if (mouseButtons.middle) {
 		cameraPos.x -= dx * 0.01f;
 		cameraPos.y -= dy * 0.01f;
 		camera.translate(glm::vec3(-dx * 0.01f, -dy * 0.01f, 0.0f));
 		viewUpdated = true;
+	} else {
+
+      rotation.x += dy * 1.25f * rotationSpeed;
+      rotation.y -= dx * 1.25f * rotationSpeed;
+      camera.rotate(glm::vec3(dy * camera.rotationSpeed, -dx * -camera.rotationSpeed, 0.0f));
+      viewUpdated = true;
+
 	}
 	mousePos = glm::vec2((float)x, (float)y);
 }

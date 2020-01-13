@@ -36,6 +36,8 @@
 #endif
 
 #include "PerlinNoise.h"
+
+glm::vec3(15.0f, -80.0f, 10.0f)
 class VulkanExample : public VulkanExampleBase {
 public:
     struct {
@@ -73,8 +75,8 @@ public:
 
     struct UBOVS {
         glm::mat4 projection;
-        glm::mat4 view;
-        glm::vec4 lightPos = glm::vec4(60.0f, 62.0f, 0.0f, 10.0f);
+        glm::mat4 modelView;
+        glm::vec4 lightPos = glm::vec4(10.0f, 0.0f, 0.0f, 1.0f);
         float locSpeed = 0.0f;
         float globSpeed = 0.0f;
     } uboVS;
@@ -99,10 +101,16 @@ public:
     VulkanExample() : VulkanExampleBase(ENABLE_VALIDATION) {
       std::cout << "Instanced mesh rendering";
       title = "Instanced mesh rendering";
+      camera.type = Camera::CameraType::firstperson;
+      camera.movementSpeed = 17.5f;
+      camera.setPosition(glm::vec3(15.0f, -80.0f, 10.0f));
+      camera.setRotation(glm::vec3(180.0f, 0.0f, 0.0f));
+      camera.setPerspective(60.0f, (float)width / (float)height, 0.1f, 256.0f);
+
       zoom = -18.5f;
-      rotation = {-17.2f, -4.7f, 0.0f};
-      cameraPos = {5.5f, -1.85f, 0.0f};
-      rotationSpeed = 0.25f;
+      settings.overlay = true;
+
+
       settings.overlay = true;
     }
 
@@ -506,7 +514,7 @@ public:
       const double fx = 256.0 / frequency;
       const double fy = 256.0 / frequency;
 
-      const siv::PerlinNoise perlin(12);
+      const siv::PerlinNoise perlin(13);
 
 
 
@@ -612,12 +620,14 @@ public:
 
     void updateUniformBuffer(bool viewChanged) {
       if (viewChanged) {
-        uboVS.projection = glm::perspective(glm::radians(60.0f), (float) width / (float) height,
-                                            0.1f, 256.0f);
-        uboVS.view = glm::translate(glm::mat4(1.0f), cameraPos + glm::vec3(0.0f, 0.0f, zoom));
-        uboVS.view = glm::rotate(uboVS.view, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
-        uboVS.view = glm::rotate(uboVS.view, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
-        uboVS.view = glm::rotate(uboVS.view, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
+
+        uboVS.projection = camera.matrices.perspective;
+        uboVS.modelView = camera.matrices.view;
+
+      //  uboVS.lightPos =glm::vec4(camera.position,1.0);
+        uboVS.lightPos =glm::vec4(10.0f, 0.0f, 0.0f, 1.0f);
+
+
       }
 
       if (!paused) {
