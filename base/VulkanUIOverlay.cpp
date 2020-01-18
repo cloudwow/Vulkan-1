@@ -46,7 +46,7 @@ namespace vks
 		style.Colors[ImGuiCol_ButtonActive] = ImVec4(1.0f, 0.0f, 0.0f, 0.8f);
 		// Dimensions
 		ImGuiIO& io = ImGui::GetIO();
-		io.FontGlobalScale = scale;
+		io.FontGlobalScale = scale*2.0;
 	}
 
 	UIOverlay::~UIOverlay()	{ }
