@@ -44,76 +44,7 @@ function(buildExamples)
 endfunction(buildExamples)
 
 set(EXAMPLES
-	bloom
-	computecloth
-	computecullandlod
-	computeheadless
-	computenbody
-	computeparticles
-	computeraytracing
-	computeshader
-	conditionalrender
-	conservativeraster
-	debugmarker
-	deferred
-	deferredmultisampling
-	deferredshadows
-	descriptorsets
-	displacement
-	distancefieldfonts
-	dynamicuniformbuffer
-	gears
-	geometryshader
-	hdr
-	imgui
-	indirectdraw
-	inlineuniformblocks
-	inputattachments
 	instancing
-	mesh
-	multisampling
-	multithreading
-	multiview
-	negativeviewportheight
-	nv_ray_tracing_basic
-	nv_ray_tracing_shadows
-	nv_ray_tracing_reflections
-	occlusionquery
-	offscreen
-	parallaxmapping
-	particlefire
-	pbrbasic
-	pbribl
-	pbrtexture
-	pipelines
-	pipelinestatistics
-	pushconstants
-	pushdescriptors
-	radialblur
-	renderheadless
-	scenerendering
-	screenshot
-	shadowmapping
-	shadowmappingomni
-	shadowmappingcascade
-	skeletalanimation
-	specializationconstants
-	sphericalenvmapping
-	ssao
-	stencilbuffer
-	subpasses
-	terraintessellation
-	tessellation
-	textoverlay
-	texture
-	texture3d
-	texturearray
-	texturecubemap
-	texturemipmapgen
-	texturesparseresidency
-	triangle
-	viewportarray
-	vulkanscene
 )
 
 buildExamples()
