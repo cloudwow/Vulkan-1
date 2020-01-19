@@ -22,5 +22,6 @@ set(KTX_INCLUDE
 )
 
 add_library(ktx ${KTX_SOURCES})
+
 target_include_directories(ktx PUBLIC ${KTX_INCLUDE})
 set_property(TARGET ktx PROPERTY FOLDER "external")

@@ -26,6 +26,7 @@
 #include "VulkanTexture.hpp"
 #include "VulkanModel.hpp"
 
+#include "entityx/entityx.h"
 #define VERTEX_BUFFER_BIND_ID 0
 #define INSTANCE_BUFFER_BIND_ID 1
 #define ENABLE_VALIDATION false
@@ -36,9 +37,13 @@
 #endif
 
 #include "PerlinNoise.h"
-
+#include "components/position.h"
+#include "components/blocknode.h"
+#include "components/block.h"
 // glm::vec3(15.0f, -80.0f, 10.0f)
 class VulkanExample : public VulkanExampleBase {
+private:
+    entityx::EntityX _entity_manager;
 public:
     struct {
         vks::Texture2DArray rocks;
@@ -112,6 +117,11 @@ public:
 
 
       settings.overlay = true;
+      entityx::Entity block= _entity_manager.entities.create();
+      block.assign<Position>(1,2,3);
+      block.assign<BlockNode>(nullptr);
+
+
     }
 
     ~VulkanExample() {

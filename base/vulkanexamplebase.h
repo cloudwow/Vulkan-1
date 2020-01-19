@@ -56,7 +56,7 @@
 
 class VulkanExampleBase
 {
-private:	
+private:
 	// Get window title with example name, device, et.
 	std::string getWindowTitle();
 	/** brief Indicates that the view (position, rotation) has changed and buffers containing camera matrices need to be updated */
@@ -126,7 +126,7 @@ protected:
 		VkSemaphore renderComplete;
 	} semaphores;
 	std::vector<VkFence> waitFences;
-public: 
+public:
 	bool prepared = false;
 	uint32_t width = 2000;
 	uint32_t height = 1400;
@@ -166,7 +166,7 @@ public:
 	float timer = 0.0f;
 	// Multiplier for speeding up (or slowing down) the global timer
 	float timerSpeed = 0.25f;
-	
+
 	bool paused = false;
 
 	// Use to adjust mouse rotation speed
@@ -184,7 +184,7 @@ public:
 	std::string name = "vulkanExample";
 	uint32_t apiVersion = VK_API_VERSION_1_0;
 
-	struct 
+	struct
 	{
 		VkImage image;
 		VkDeviceMemory mem;
@@ -202,7 +202,7 @@ public:
 		bool middle = false;
 	} mouseButtons;
 
-	// OS specific 
+	// OS specific
 #if defined(_WIN32)
 	HWND window;
 	HINSTANCE windowInstance;
@@ -323,7 +323,7 @@ public:
 	// Pure virtual render function (override in derived class)
 	virtual void render() = 0;
 	// Called when view change occurs
-	// Can be overriden in derived class to e.g. update uniform buffers 
+	// Can be overriden in derived class to e.g. update uniform buffers
 	// Containing view dependant matrices
 	virtual void viewChanged();
 	/** @brief (Virtual) Called after a key was pressed, can be used to do custom key handling */
@@ -364,7 +364,7 @@ public:
 	// Create command buffers for drawing commands
 	void createCommandBuffers();
 	// Destroy all command buffers and set their handles to VK_NULL_HANDLE
-	// May be necessary during runtime if options are toggled 
+	// May be necessary during runtime if options are toggled
 	void destroyCommandBuffers();
 
 	// Command buffer creation
@@ -382,7 +382,7 @@ public:
 
 	// Load a SPIR-V shader
 	VkPipelineShaderStageCreateInfo loadShader(std::string fileName, VkShaderStageFlagBits stage);
-	
+
 	// Start the main render loop
 	void renderLoop();
 
@@ -393,11 +393,11 @@ public:
 	void drawUI(const VkCommandBuffer commandBuffer);
 
 	// Prepare the frame for workload submission
-	// - Acquires the next image from the swap chain 
+	// - Acquires the next image from the swap chain
 	// - Sets the default wait and signal semaphores
 	void prepareFrame();
 
-	// Submit the frames' workload 
+	// Submit the frames' workload
 	void submitFrame();
 
 	/** @brief (Virtual) Called when the UI overlay is updating, can be used to add custom elements to the overlay */

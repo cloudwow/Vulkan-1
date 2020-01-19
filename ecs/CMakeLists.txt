@@ -1,0 +1,10 @@
+file(GLOB ECS_SRC "*.cpp" "*.hpp")
+file(GLOB ECS_HEADERS "*.hpp")
+
+if(WIN32)
+    add_library(ecs STATIC ${ECS_SRC})
+    target_link_libraries(ecs ${Vulkan_LIBRARY} ${ASSIMP_LIBRARIES} ${WINLIBS} )
+ else(WIN32)
+    add_library(ecs STATIC ${ECS_SRC})
+    target_link_libraries(ecs ${Vulkan_LIBRARY} ${ASSIMP_LIBRARIES} ${XCB_LIBRARIES} ${WAYLAND_CLIENT_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} )
+endif(WIN32)
